@@ -21,7 +21,7 @@ resource "spacelift_policy_attachment" "access" {
 
 # PLAN POLICY
 #
-# This example plan policy prevents you from creating weak passwords, and warns 
+# This example plan policy prevents you from creating weak passwords, and warns
 # you when passwords are meh.
 #
 # You can read more about plan policies here:
@@ -107,4 +107,8 @@ resource "spacelift_policy" "login" {
 
   name = "DevOps are admins"
   body = file("${path.module}/policies/login.rego")
+}
+resource "spacelift_policy_attachment" "login" {
+  policy_id = spacelift_policy.trigger.id
+  stack_id  = spacelift_stack.managed.id
 }
