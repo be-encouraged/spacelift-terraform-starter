@@ -108,8 +108,3 @@ resource "spacelift_policy" "login" {
   name = "DevOps are admins"
   body = file("${path.module}/policies/login.rego")
 }
-
-resource "spacelift_policy_attachment" "login" {
-  policy_id = spacelift_policy.login.id
-  stack_id  = spacelift_stack.managed.id
-}
